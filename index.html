@@ -1,0 +1,219 @@
+<html>
+<head>
+  <title>Binance Autobuy New Coin Listings</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    
+  <!-- Insert this line above script imports  -->
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+<!-- normal script imports etc  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> 
+<script type="text/javascript" src="crypto-js.js"></script>
+<script src="index.js"></script>  
+
+<!-- Insert this line after script imports -->
+<script>if (window.module) module = window.module;</script>  
+    
+</head>
+<body>
+    
+    
+<div class="container">
+    
+    <h1>Binance Autobuy New Coin Listings</h1>
+    <p>This is a tool allows you to buy a coin as soon as its listed on Binance exchange</p>
+    
+    
+    <!-- API Keys --->
+    <br>
+    <div class="row">    
+    <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#keys">Keys</button>
+    </div>
+    <div id="keys" class="collapse">
+    <br>
+    <div class="row form-group col-sm-7">
+        <input class="form-control" type="password" id="apikey" placeholder="Binance API Key">
+    </div>
+    <div class="row form-group col-sm-7">
+        <input class="form-control" type="password" id="seckey" placeholder="Binance Secret Key">
+    </div>
+    <div class="row form-group col-sm-7">
+        <input class="form-control" type="password" id="cmcapikey" placeholder="CoinMarketCap Secret Key">
+    </div>
+    </div>
+    
+    <!-- Settings --->
+    <br>
+    <div class="row">    
+    <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#settings">Settings</button>
+    </div>
+    <div id="settings" class="collapse">
+    <br>
+    <div class="row">
+    <div class="col-sm-7">
+    <div class="card">
+    <div id="chead" class="card-header">
+         <h6>Start Trading <input id="tradeon" type="checkbox" value="true"> </h6>
+    </div>
+    <div class="card-body">
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="col-sm-2 input-group-text">Explicit trade Coin:</span>
+      </div>
+      <input class="col-sm-2 form-control" type="text" id="coin" value="">
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <h7 style="text-align:left;"> * Enter the Explicit trade coin after filling all the other fields </h7>
+            <h7 style="text-align:left;"> * New coins purchase will be disabled, if Exliplicit trading </h7>
+            <h7 style="text-align:left;"> * To trade any coin (new/explicit),check the "Start Trading" option </h7>
+            <h7 style="text-align:left;"> * Maintain BNB balance for Binance commission fee </h7>
+            <h7 style="text-align:left;"> * Explicit trade starts 1 minute after entering the coin above </h7>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="col-sm-2 input-group-text">Funds from:</span>
+      </div>
+      <select id="fiatfrom" class="col-sm-2 chosen-select form-control" >
+            <option value="USDT">USDT</option>
+            <option value="BUSD">BUSD</option>
+      </select>
+    </div>
+        
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="col-sm-2 input-group-text">Funds Amt:</span>
+      </div>
+      <input class="col-sm-2 form-control" type="text" id="famount" value="10">
+    </div>
+     
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="col-sm-2 input-group-text">Auto-Sell when Trailing Stop:</span>
+      </div>
+      <input id="asell" type="checkbox" checked>
+    </div>
+        
+     <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="col-sm-2 input-group-text">Trailing Stop:</span>
+      </div>
+      <input class="col-sm-2 form-control" type="text" id="tstop" value="2">
+    </div>
+        
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="col-sm-2 input-group-text">Check Coin Market Ranking:</span>
+      </div>
+      <input id="crank" type="checkbox" checked>
+    </div>
+        
+     <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="col-sm-2 input-group-text">Rank Less Than:</span>
+      </div>
+      <input class="col-sm-2 form-control" type="text" id="crankval" value="1000">
+      <h6 style="text-align:center;">  &nbsp; Continue if rank is missing  <input type="checkbox" id="skipim" checked></h6>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-sm-5">
+      <div class="card">
+        <div class="card-header bg-dark text-white row">
+        <h6>Trade Live Status</h6></div>
+        <div class="card-body">
+        <div class="row">
+            <h3 style="text-align:center;"> Coin price : &nbsp; </h3>
+            <h3 style="text-align:center;" id="status5"> 1.5$ </h3>
+        </div>
+        <div class="row">
+            <h2 id="status1" >102$</h2> <div id="status4" class="text-success"> <h2 id="status2" >(2.3%)</h2></div>
+        </div>
+        <div class="row">
+            <button id="exitTradeNow" type="button" class="btn btn-sm btn-success" >Exit Now</button>
+        </div>
+        <br>
+        <div class="card card-body bg-warning">
+            <h6 id="status3" > 0.034(USDT) -> 234(CVC) -> 0.038(USDT) </h6>
+        </div>    
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <!--
+    <h4>Trades Executed:</h4>
+    <table id="tradeslist" class="table">
+        <thead>
+            <tr>
+                <th>Comments</th>
+                <th>Date/Time</th>
+                <th>Coin 1</th>
+                <th>Coin 2</th>
+                <th>Coin 3</th>
+                <th>Coin 4</th>
+                <th>Coin 5</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>-->   
+    
+    
+</div>
+<!---<script src="index.js"></script>--->
+</body>    
+    
+<script>
+    
+    document.getElementById("exitTradeNow").disabled = true;
+    
+    $("#tradeon").click(function(){
+         if(this.checked) {
+           $("#chead").addClass("bg-danger text-white");  
+         }
+        else{
+            $("#chead").removeClass("bg-danger text-white");
+        }
+    });
+    
+    $("#asell").click(function(){
+         if(this.checked) {
+           document.getElementById("tstop").disabled = false;  
+         }
+        else{
+            document.getElementById("tstop").disabled = true;  
+        }
+    });
+    
+    $("#crank").click(function(){
+         if(this.checked) {
+           document.getElementById("crankval").disabled = false;  
+           document.getElementById("skipim").disabled = false;  
+         }
+        else{
+            document.getElementById("crankval").disabled = true;  
+           document.getElementById("skipim").disabled = true;
+        }
+    });
+    
+    
+</script>
+</html>
