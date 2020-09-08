@@ -12,9 +12,15 @@ Steps to run:
 Useful links:
 
 https://nodejs.org/en/
+
 https://www.npmjs.com/package/xmlhttprequest
+
 https://www.npmjs.com/package/electron
+
 https://www.npmjs.com/package/bootstrap
+
 https://www.npmjs.com/package/jquery
+
 https://www.npmjs.com/package/binance
+
 https://www.electronjs.org/docs/tutorial/first-app
