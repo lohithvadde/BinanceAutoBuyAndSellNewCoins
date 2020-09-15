@@ -3,6 +3,10 @@ NOTE:
 Always maintain BNB balance in Binance wallet, otherwise Binance will charge 0.1% percent commission from the bought assets (coins).
 This will lead to reduction in coin quantity. So, you can't sell the quantity which the system computed based on your balance & coin price.
 You will get into LOT_SIZE or Insufficient balance or MIN_NOTION issues.
+
+
+Always maintain extra FIAT balance, as the new coin prices fluctuate it is impossible to buy the calculated quantity at the same price.
+
 */
 const $ = require('jquery');
 const api = require('binance');
