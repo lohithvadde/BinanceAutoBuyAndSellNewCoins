@@ -24,3 +24,6 @@ https://www.npmjs.com/package/jquery
 https://www.npmjs.com/package/binance
 
 https://www.electronjs.org/docs/tutorial/first-app
+
+NOTE:
+Use new coin auto buy and sell feature at your own risk. Explicit trading is better.
